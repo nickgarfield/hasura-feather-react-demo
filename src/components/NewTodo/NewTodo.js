@@ -1,13 +1,20 @@
 import React, { useState } from "react";
+// import { getClient, MUTATIONS, QUERIES } from "apollo";
 import { createTodo } from "api";
 import "./NewTodo.css";
 
 function NewTodo(props) {
   const [title, setTitle] = useState("");
+  const [error, setError] = useState(null);
 
   const onSubmit = e => {
     e.preventDefault();
-    createTodo(title).catch(error => console.log(error));
+    createTodo(title)
+      .then(newTodo => {
+        setTitle("");
+        props.refresh();
+      })
+      .catch(e => setError(e));
   };
 
   const onChange = e => {
@@ -15,6 +22,7 @@ function NewTodo(props) {
     setTitle(e.target.value);
   };
 
+  if (error) return <p>{error.message}</p>;
   return (
     <form onSubmit={onSubmit}>
       <input

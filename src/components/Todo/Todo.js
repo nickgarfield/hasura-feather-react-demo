@@ -1,27 +1,29 @@
 import React, { useState } from "react";
 import { updateTodo } from "api";
 
-function Todo(props) {
+import "./Todo.css";
+
+export default function Todo(props) {
   const [todo, setTodo] = useState(props.todo);
+  const [error, setError] = useState(null);
 
   const toggleTodo = e => {
-    updateTodo({ ...todo, is_completed: !todo.is_completed })
-      .then(updateTodo => setTodo(updateTodo))
-      .catch(error => console.log(error));
+    updateTodo(todo)
+      .then(updatedTodo => setTodo(updatedTodo))
+      .catch(e => setError(e));
   };
 
+  if (error) return <p>{error.message}</p>;
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
       <input
         type="checkbox"
+        className="todo-checkbox"
         name={todo.id}
         checked={todo.is_completed}
         onChange={toggleTodo}
-        style={{ margin: "auto 10px auto 0px" }}
       />
       <p>{todo.title}</p>
     </div>
   );
 }
-
-export default Todo;

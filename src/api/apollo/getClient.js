@@ -21,7 +21,7 @@ function authLink(user) {
   });
 }
 
-export default function getClient() {
+export function getClient() {
   return new Promise(function(resolve, reject) {
     feather
       .currentUser()

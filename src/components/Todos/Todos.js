@@ -3,19 +3,25 @@ import Todo from "components/Todo";
 import NewTodo from "components/NewTodo";
 import { getTodos } from "api";
 
-function Todos(props) {
+export default function Todos(props) {
   const [todos, setTodos] = useState([]);
   const [error, setError] = useState(null);
+  const [shouldRefresh, setShouldRefresh] = useState(false);
 
   useEffect(() => {
     let mounted = true;
+
     getTodos()
-      .then(resp => {
-        if (mounted) setTodos(resp.data.todos);
+      .then(todos => {
+        if (mounted) {
+          setTodos(todos);
+          setShouldRefresh(false);
+        }
       })
-      .catch(error => setError(error));
+      .catch(e => setError(e));
+
     return () => (mounted = false);
-  }, [props.currentUser, setTodos]);
+  }, [props.currentUser, shouldRefresh]);
 
   if (error) return <p>{error.message}</p>;
   return (
@@ -23,9 +29,7 @@ function Todos(props) {
       {todos.map(todo => (
         <Todo key={todo.id} todo={todo} />
       ))}
-      <NewTodo />
+      <NewTodo refresh={() => setShouldRefresh(true)} />
     </div>
   );
 }
-
-export default Todos;

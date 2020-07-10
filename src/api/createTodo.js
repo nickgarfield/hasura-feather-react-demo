@@ -1,21 +1,24 @@
-import getClient from "./getClient.js";
-import gql from "graphql-tag";
+import { getClient, QUERIES, MUTATIONS } from "./apollo";
 
 export function createTodo(title) {
-  const mutation = gql`
-    mutation CreateTodo {
-      insert_todos_one(object: { title: "${title}" }) {
-        id
-        title
-        is_completed
-      }
-    }
-  `;
-
   return new Promise(function(resolve, reject) {
+    const updateCache = (cache, { data: { insert_todos_one } }) => {
+      const { todos } = cache.readQuery({ query: QUERIES.GET_TODOS });
+      cache.writeQuery({
+        query: QUERIES.GET_TODOS,
+        data: { todos: todos.concat([insert_todos_one]) }
+      });
+    };
+
     getClient()
-      .then(client => client.mutate({ mutation }))
-      .then(result => resolve(result.data.insert_todos_one.returning[0]))
+      .then(client =>
+        client.mutate({
+          mutation: MUTATIONS.CREATE_TODO,
+          variables: { title },
+          update: updateCache
+        })
+      )
+      .then(result => resolve(result.data.insert_todos_one))
       .catch(error => reject(error));
   });
 }
