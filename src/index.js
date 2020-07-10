@@ -1,12 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { Feather, FeatherContext } from "feather-client-react";
-
-// Initialize Feather
-const feather = Feather("pk_live_dg4NiScoWDcBeGZoHClUGY55XqNNaH");
+import { FeatherContext } from "feather-client-react";
+import { feather } from "feather";
+import App from "components/App";
 
 // Run the React app
 ReactDOM.render(

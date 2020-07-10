@@ -2,10 +2,12 @@ import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
+import { feather } from "feather";
 
 const cache = new InMemoryCache();
 const httpLink = new HttpLink({
-  uri: "https://hasura-test-pliao.herokuapp.com/v1/graphql"
+  uri: "https://hasura-test-pliao.herokuapp.com/v1/graphql",
+  fetchPolicy: "network-only"
 });
 
 function authLink(user) {
@@ -19,9 +21,18 @@ function authLink(user) {
   });
 }
 
-export function client(user) {
-  return new ApolloClient({
-    cache,
-    link: authLink(user).concat(httpLink)
+export default function getClient() {
+  return new Promise(function(resolve, reject) {
+    feather
+      .currentUser()
+      .then(user =>
+        resolve(
+          new ApolloClient({
+            cache,
+            link: user ? authLink(user).concat(httpLink) : httpLink
+          })
+        )
+      )
+      .catch(error => reject(error));
   });
 }

@@ -1,41 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { AuthenticationForm, withFeather } from "feather-client-react";
-import { getTodos } from "./api";
+import { createUserProfile, getUserProfile } from "api";
+import Todos from "components/Todos";
+
+import "./App.css";
 
 function App(props) {
-  // Initialize the app state (this can also be done with something like Redux)
   const [currentUser, setCurrentUser] = useState(null);
-  const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    // Listen for authentication state changes
     let mounted = true;
     props.feather.onStateChange(user => {
+      if (mounted) setCurrentUser(user);
       if (user) {
-        // If there is an authenticated user, fetch their todos
-        return getTodos(user)
-          .then(todos => {
-            if (mounted) {
-              setCurrentUser(user);
-              setTodos(todos);
-            }
+        getUserProfile(user.id)
+          .then(userProfile => {
+            if (!userProfile) createUserProfile(user);
           })
           .catch(error => console.log(error));
-      } else {
-        // If there is not an authenticated user, nullify the app state
-        if (mounted) {
-          setCurrentUser(null);
-          setTodos([]);
-        }
       }
     });
     return () => (mounted = false);
   }, [props.feather]);
 
   return (
-    <div className="App">
+    <div className="app">
+      <h1>My to-do list</h1>
       {currentUser ? (
-        <p>{JSON.stringify(todos)}</p>
+        <div>
+          <div className="app-header">
+            <p>{currentUser.email}</p>
+          </div>
+          <Todos />
+        </div>
       ) : (
         <AuthenticationForm feather={props.feather} />
       )}

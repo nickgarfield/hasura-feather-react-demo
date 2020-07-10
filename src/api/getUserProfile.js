@@ -1,13 +1,13 @@
 import getClient from "./getClient.js";
 import gql from "graphql-tag";
 
-export function getTodos(user) {
+export function getUserProfile(id) {
   const query = gql`
-    query GetTodos {
-      todos {
+    query GetUserProfile {
+      users {
         id
-        title
-        is_completed
+        name
+        created_at
       }
     }
   `;
@@ -15,7 +15,9 @@ export function getTodos(user) {
   return new Promise(function(resolve, reject) {
     getClient()
       .then(client => client.query({ query }))
-      .then(result => resolve(result))
+      .then(result =>
+        resolve(result.data.users.length > 0 ? result.data.users[0] : null)
+      )
       .catch(error => reject(error));
   });
 }
