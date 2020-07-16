@@ -11,7 +11,7 @@
     "apollo-client": "^2.6.10",
     "apollo-link-context": "^1.0.20",
     "apollo-link-http": "^1.5.17",
-    "feather-client-react": "^0.0.19",
+    "feather-client-react": "^0.0.21",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.3",
     "react": "^16.13.1",

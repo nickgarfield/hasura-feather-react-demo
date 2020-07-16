@@ -1,13 +1,13 @@
 import React from "react";
-import { withCurrentUser } from "feather-client-react";
+import { AuthenticationForm, withCurrentUser } from "feather-client-react";
 import Todos from "./Todos";
-import SignIn from "./SignIn";
 
 function App(props) {
+  if (props.isLoadingCurrentUser) return <div />;
   if (!props.currentUser) {
     return (
       <div className="app">
-        <SignIn />
+        <AuthenticationForm />;
       </div>
     );
   }

@@ -3,18 +3,17 @@ import ReactDOM from "react-dom";
 import App from "./components/App";
 import { ApolloProvider } from "@apollo/client";
 import { apollo } from "./apollo.js";
-import { FeatherProvider } from "feather-client-react";
-import { feather } from "./feather.js";
+import { Feather } from "feather-client-react";
 import * as serviceWorker from "./serviceWorker";
 import "./index.css";
 
 // Run the React app
 ReactDOM.render(
-  <ApolloProvider client={apollo}>
-    <FeatherProvider feather={feather}>
+  <Feather apiKey="pk_live_G92B6M6Gxo7QzpVcAM4BXHtcvDs3Sb">
+    <ApolloProvider client={apollo}>
       <App />
-    </FeatherProvider>
-  </ApolloProvider>,
+    </ApolloProvider>
+  </Feather>,
   document.getElementById("root")
 );
 

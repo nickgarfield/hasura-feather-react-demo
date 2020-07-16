@@ -4755,24 +4755,24 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
-feather-client-js@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/feather-client-js/-/feather-client-js-0.0.14.tgz#f1e160b0a3c70442d028c35891f54d60cea8273f"
-  integrity sha512-zSvgfggpOPHUKY3R5VNaXp+qBp/duhLm/qO5JpkOLYhFdVYnOL6nP0GscMyw5bz5945di7PfdTvCEwR7G775uQ==
+feather-client-js@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/feather-client-js/-/feather-client-js-0.0.18.tgz#12866277cdaf36a6ca136e4c967acea902764b9c"
+  integrity sha512-xo6M+YpTO6TEU/pOsULAByngQgpRl6MO8V38UpEmpejKFZS8Wm316NMuVssPLSmyxj647gxwTm1d5lTkUt7EnA==
   dependencies:
     jws "^4.0.0"
     node-fetch "^2.6.0"
 
-feather-client-react@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/feather-client-react/-/feather-client-react-0.0.17.tgz#fc39d088bc365010902eb5f860ab4597721922cb"
-  integrity sha512-ZoUh7ecl2spzysdzuv2bY58hEjH0rdWUr1dlQxXWJeufr1DLdybOVWS7/gBm2mJrLwDE50K7BTkEFAwNM4DmIw==
+feather-client-react@^0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/feather-client-react/-/feather-client-react-0.0.21.tgz#d7a56d72508eaf4c172994f8c6a2301e7a6eb50f"
+  integrity sha512-KuB+O43XiAEUfNOCHn5bkBm51uXOIY3sPBmTO1qMgpbT+r+is09HUBROavpOcYBf1VY4ElFawjDtxNYCYTu4WQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.29"
     "@fortawesome/free-solid-svg-icons" "^5.13.1"
     "@fortawesome/react-fontawesome" "^0.1.11"
     emotion "^10.0.27"
-    feather-client-js "^0.0.14"
+    feather-client-js "^0.0.18"
     jws "^4.0.0"
     querystring "^0.2.0"
 
