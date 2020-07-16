@@ -1,28 +1,29 @@
 import React, { useState } from "react";
-// import { getClient, MUTATIONS, QUERIES } from "apollo";
-import { createTodo } from "api";
-import "./NewTodo.css";
+import { useMutation, gql } from "@apollo/client";
+
+const CREATE_TODO = gql`
+  mutation CreateTodo($title: String!) {
+    insert_todos_one(object: { title: $title }) {
+      id
+      title
+      is_completed
+    }
+  }
+`;
 
 function NewTodo(props) {
   const [title, setTitle] = useState("");
-  const [error, setError] = useState(null);
+  const [createTodo] = useMutation(CREATE_TODO);
 
   const onSubmit = e => {
     e.preventDefault();
-    createTodo(title)
-      .then(newTodo => {
-        setTitle("");
-        props.refresh();
-      })
-      .catch(e => setError(e));
+    createTodo({ variables: { title } });
   };
 
   const onChange = e => {
-    e.preventDefault();
     setTitle(e.target.value);
   };
 
-  if (error) return <p>{error.message}</p>;
   return (
     <form onSubmit={onSubmit}>
       <input

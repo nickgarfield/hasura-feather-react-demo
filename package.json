@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.0.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -10,7 +11,7 @@
     "apollo-client": "^2.6.10",
     "apollo-link-context": "^1.0.20",
     "apollo-link-http": "^1.5.17",
-    "feather-client-react": "^0.0.17",
+    "feather-client-react": "^0.0.19",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.3",
     "react": "^16.13.1",

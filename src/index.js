@@ -1,18 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import App from "./components/App";
+import { ApolloProvider } from "@apollo/client";
+import { apollo } from "./apollo.js";
+import { FeatherProvider } from "feather-client-react";
+import { feather } from "./feather.js";
 import * as serviceWorker from "./serviceWorker";
-import { FeatherContext } from "feather-client-react";
-import { feather } from "feather";
-import App from "components/App";
+import "./index.css";
 
 // Run the React app
 ReactDOM.render(
-  <React.StrictMode>
-    <FeatherContext.Provider value={feather}>
+  <ApolloProvider client={apollo}>
+    <FeatherProvider feather={feather}>
       <App />
-    </FeatherContext.Provider>
-  </React.StrictMode>,
+    </FeatherProvider>
+  </ApolloProvider>,
   document.getElementById("root")
 );
 

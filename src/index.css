@@ -12,3 +12,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.app {
+  padding: 80px;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.app-header {
+  margin-bottom: 40px;
+}
+
+.todo-checkbox {
+  margin: auto 10px auto 0px;
+}
+
+.new-todo-input {
+  font-size: 20px;
+  padding: 20px;
+  width: 100%;
+  margin-top: 40px;
+}
