@@ -9,7 +9,7 @@ const httpLink = new HttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const idToken = sessionStorage.getItem("feather.currentUser.idToken");
+  const idToken = sessionStorage.getItem("feather.currentUser.tokens.idToken");
   return {
     headers: {
       ...headers,
